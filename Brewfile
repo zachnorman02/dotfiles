@@ -28,6 +28,6 @@ cask "google-chrome"
 cask "firefox"
 cask "claude"
 
-# Tailscale from the App Store (must be signed into the App Store first).
-# If this ID is ever wrong, `mas search Tailscale` shows the current one.
-mas "Tailscale", id: 1475387142
+# Tailscale — Standalone variant (Tailscale's recommended macOS build).
+# Do NOT also install the App Store version; having both breaks the extension.
+cask "tailscale-app"

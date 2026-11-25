@@ -17,7 +17,7 @@ The script is idempotent — safe to re-run any time.
 ## What it does
 
 - Xcode Command Line Tools + Homebrew (and adds `brew` to `~/.zprofile`)
-- Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Tailscale
+- Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Tailscale (Standalone variant)
 - zsh: `setopt interactivecomments` (so pasted `# comments` work)
 - Python 3.12 / 3.13 via `uv`, plus an `~/ml` venv with `mlx-lm`
 - Git defaults (`main`, rebase on pull, auto-upstream, prune, rerere) and a global gitignore
