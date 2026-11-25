@@ -11,7 +11,7 @@ brew "uv"
 brew "node"
 brew "awscli"
 brew "jq"
-brew "mas"          # Mac App Store CLI (used for Tailscale below)
+brew "mas"          # Mac App Store CLI
 
 # --- Local LLM ---
 brew "llama.cpp"
