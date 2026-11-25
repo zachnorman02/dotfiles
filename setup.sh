@@ -144,6 +144,7 @@ EOF
   sudo chown root:wheel "$PLIST"; sudo chmod 644 "$PLIST"
   sudo launchctl bootout system "$PLIST" 2>/dev/null || true
   sudo launchctl bootstrap system "$PLIST"
+  sudo sysctl "iogpu.wired_limit_mb=${GPU_WIRED_MB}" >/dev/null   # apply now; launchd job handles reboots
   sysctl iogpu.wired_limit_mb
 fi
 
