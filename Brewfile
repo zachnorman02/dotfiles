@@ -24,6 +24,9 @@ cask "orbstack"
 cask "rectangle"
 cask "raycast"
 cask "stats"
+cask "google-chrome"
+cask "firefox"
+cask "claude"
 
 # Tailscale from the App Store (must be signed into the App Store first).
 # If this ID is ever wrong, `mas search Tailscale` shows the current one.

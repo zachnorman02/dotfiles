@@ -51,6 +51,11 @@ if [[ "${SKIP_APPS:-0}" != "1" ]]; then
   brew bundle --file="$SCRIPT_DIR/Brewfile" || warn "Some Brewfile entries failed — check output above (mas needs App Store sign-in)."
 fi
 
+# --- zsh ---------------------------------------------------------------------
+log "zsh options"
+touch "$HOME/.zshrc"
+grep -qxF 'setopt interactivecomments' "$HOME/.zshrc" || echo 'setopt interactivecomments' >> "$HOME/.zshrc"
+
 # --- Git config --------------------------------------------------------------
 log "Git config"
 gitset() { git config --global "$1" >/dev/null 2>&1 || git config --global "$1" "$2"; }  # only if unset
