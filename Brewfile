@@ -18,7 +18,7 @@ brew "llama.cpp"
 brew "ollama"
 
 # --- UPS ---
-brew "nut"          # NUT client; configure with ups/setup-nut-client.sh
+brew "nut"          # NUT client; configure with ./setup.sh nut
 
 # --- Apps ---
 cask "lm-studio"

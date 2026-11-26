@@ -12,28 +12,50 @@ cd ~/dotfiles
 GIT_NAME="Your Name" GIT_EMAIL="you@example.com" ./setup.sh
 ```
 
-The script is idempotent — safe to re-run any time.
+Everything is idempotent — safe to re-run any time.
 
-## What it does
+## Running parts of it
 
-- Xcode Command Line Tools + Homebrew (and adds `brew` to `~/.zprofile`)
-- Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Tailscale (Standalone variant)
-- zsh: `setopt interactivecomments` (so pasted `# comments` work)
-- Python 3.12 / 3.13 via `uv`, plus an `~/ml` venv with `mlx-lm`
-- Git defaults (`main`, rebase on pull, auto-upstream, prune, rerere) and a global gitignore
-- Ollama as a background service
-- Power: never sleep, wake on LAN, auto-restart after power loss
-- Firewall on, Remote Login (SSH) and Screen Sharing on
-- Time Machine exclusions for model caches (`~/.lmstudio`, `~/.ollama`, `~/.cache/huggingface`, `~/ml/.venv`)
+`setup.sh` runs a list of modules in `scripts/`. Run all of them, or just the ones you name:
+
+```bash
+./setup.sh                  # all default modules, in order
+./setup.sh git zsh          # only these
+./setup.sh nut              # an optional module
+./setup.sh --list           # what's available
+./scripts/gpu.sh            # any module also runs on its own
+```
+
+| Module | What it does | Default? |
+|---|---|---|
+| `xcode` | Xcode Command Line Tools | yes |
+| `homebrew` | Homebrew, added to `~/.zprofile` | yes |
+| `apps` | Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, NUT, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Tailscale (Standalone) | yes |
+| `zsh` | `setopt interactivecomments` (pasted `# comments` work) | yes |
+| `git` | Identity (from `GIT_NAME`/`GIT_EMAIL`), sensible defaults, global gitignore | yes |
+| `python` | Python 3.12/3.13 via `uv`, `~/ml` venv with `mlx-lm` | yes |
+| `ollama` | Ollama as a background service | yes |
+| `macos` | Never sleep, wake on LAN, restart after power loss, firewall, SSH, Screen Sharing, optional rename | yes |
+| `timemachine` | Exclude model caches from Time Machine | yes |
+| `gpu` | Persist the GPU memory limit (skipped unless `GPU_WIRED_MB` is set) | yes |
+| `nut` | Shut down cleanly when the UPS on the NAS runs low | no — run by name |
 
 ## Options
 
-| Env var | Effect |
-|---|---|
-| `GIT_NAME` / `GIT_EMAIL` | Set git identity (only applied when given) |
-| `NEW_HOSTNAME` | Rename the machine |
-| `GPU_WIRED_MB` | Persist `iogpu.wired_limit_mb` across reboots (e.g. `114688` ≈ 112 GB on a 128 GB machine) |
-| `SKIP_APPS=1` | Skip `brew bundle`; settings only |
+| Env var | Used by | Effect |
+|---|---|---|
+| `GIT_NAME` / `GIT_EMAIL` | `git` | Set git identity (only applied when given) |
+| `NEW_HOSTNAME` | `macos` | Rename the machine |
+| `GPU_WIRED_MB` | `gpu` | Persist `iogpu.wired_limit_mb` (e.g. `114688` ≈ 112 GB on a 128 GB machine) |
+| `NAS_IP` | `nut` | NAS home-network IP (prompts if unset) |
+
+## Adding a module
+
+1. Create `scripts/<name>.sh`. Line 2 is a one-line comment describing it (shown by `--list`).
+2. Start it with `source "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/lib/common.sh"` to get `log`, `warn`, `die`, `need_sudo` and `brew_env`.
+3. Add its name to `DEFAULT` or `OPTIONAL` in `setup.sh`.
+
+Exit 0 on success, 1 on failure (the run continues and reports it at the end), or 2 to stop the whole run because something needs you first.
 
 ## Manual steps afterwards
 
@@ -42,12 +64,12 @@ The script is idempotent — safe to re-run any time.
 3. `gh auth login`
 4. Confirm **System Settings → General → Sharing → Screen Sharing / Remote Login** are on (macOS sometimes ignores the scripted toggle)
 
-## UPS shutdown (NUT client)
+## UPS shutdown (`nut` module)
 
 The UPS's USB cable goes to the NAS, which runs a NUT server (UGOS: Control Panel → Hardware & Power → UPS → NUT Server: Enable). This Mac listens to it and shuts down cleanly when the battery runs low.
 
 ```bash
-./ups/setup-nut-client.sh
+./setup.sh nut
 ```
 
 It asks for the NAS's home-network IP and the NUT password (from `/etc/nut/upsd.users` on the NAS). The password goes only into a root-only file on this Mac, never this repo.
