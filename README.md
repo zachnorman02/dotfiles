@@ -41,3 +41,13 @@ The script is idempotent — safe to re-run any time.
 2. Open Tailscale and sign in
 3. `gh auth login`
 4. Confirm **System Settings → General → Sharing → Screen Sharing / Remote Login** are on (macOS sometimes ignores the scripted toggle)
+
+## UPS shutdown (NUT client)
+
+The UPS's USB cable goes to the NAS, which runs a NUT server (UGOS: Control Panel → Hardware & Power → UPS → NUT Server: Enable). This Mac listens to it and shuts down cleanly when the battery runs low.
+
+```bash
+./ups/setup-nut-client.sh
+```
+
+It asks for the NAS's home-network IP and the NUT password (from `/etc/nut/upsd.users` on the NAS). The password goes only into a root-only file on this Mac, never this repo.

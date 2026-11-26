@@ -17,6 +17,9 @@ brew "mas"          # Mac App Store CLI
 brew "llama.cpp"
 brew "ollama"
 
+# --- UPS ---
+brew "nut"          # NUT client; configure with ups/setup-nut-client.sh
+
 # --- Apps ---
 cask "lm-studio"
 cask "visual-studio-code"
