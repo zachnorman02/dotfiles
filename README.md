@@ -39,6 +39,7 @@ Everything is idempotent — safe to re-run any time.
 | `timemachine` | Exclude model caches from Time Machine | yes |
 | `gpu` | Persist the GPU memory limit (skipped unless `GPU_WIRED_MB` is set) | yes |
 | `nut` | Shut down cleanly when the UPS on the NAS runs low | no — run by name |
+| `hermes` | [Hermes Agent](https://hermes-agent.nousresearch.com/docs) by Nous Research (official installer) | no — run by name |
 
 ## Options
 

@@ -20,7 +20,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/lib/common.sh"
 # Run by default, in this order.
 DEFAULT=(xcode homebrew apps zsh git python ollama macos timemachine gpu)
 # Only run when named (interactive or machine-specific).
-OPTIONAL=(nut)
+OPTIONAL=(nut hermes)
 
 describe() { sed -n '2s/^# *//p' "$DOTFILES_DIR/scripts/$1.sh"; }
 
