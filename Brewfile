@@ -30,6 +30,7 @@ cask "stats"
 cask "google-chrome"
 cask "firefox"
 cask "claude"
+cask "claude-code"    # Claude Code CLI (`claude` in the terminal / over SSH)
 
 # Tailscale — Standalone variant (Tailscale's recommended macOS build).
 # Do NOT also install the App Store version; having both breaks the extension.

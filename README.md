@@ -30,7 +30,7 @@ Everything is idempotent — safe to re-run any time.
 |---|---|---|
 | `xcode` | Xcode Command Line Tools | yes |
 | `homebrew` | Homebrew, added to `~/.zprofile` | yes |
-| `apps` | Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, NUT, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Tailscale (Standalone) | yes |
+| `apps` | Everything in [`Brewfile`](Brewfile): dev CLIs, llama.cpp, Ollama, NUT, LM Studio, VS Code, OrbStack, Rectangle, Raycast, Stats, Chrome, Firefox, Claude, Claude Code CLI, Tailscale (Standalone) | yes |
 | `zsh` | `setopt interactivecomments` (pasted `# comments` work) | yes |
 | `git` | Identity (from `GIT_NAME`/`GIT_EMAIL`), sensible defaults, global gitignore | yes |
 | `python` | Python 3.12/3.13 via `uv`, `~/ml` venv with `mlx-lm` | yes |
